@@ -1,6 +1,8 @@
 package pl.coderslab.warsztat2krajeew04.model;
 
-public class User { 
+import org.mindrot.jbcrypt.BCrypt;
+
+public class User {
    private int  id;
    private String  username;
    private String  email;
@@ -9,7 +11,7 @@ public class User {
     public User(String username, String email, String password) {
         this.username = username;
         this.email = email;
-        this.password = password;
+        setPassword(password);
     }
 
     public int getId() {
@@ -41,7 +43,10 @@ public class User {
     }
 
     public void setPassword(String password) {
-        this.password = password;
+        this.password = BCrypt.hashpw(password, BCrypt.gensalt());
+    }
+    public boolean checkPassword(String plain){
+        return BCrypt.checkpw(plain, this.password);
     }
 
     public User(){
