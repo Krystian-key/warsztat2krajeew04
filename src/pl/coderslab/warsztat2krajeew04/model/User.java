@@ -12,9 +12,24 @@ public class User {
     private String username;
     private String email;
     private String password;
-    private String userGroupId;
+    private int userGroupId;
 
-    public User(int id, String username, String email, String password, String userGroupId) {
+    public void setPassword(String password) {
+        this.password = BCrypt.hashpw(password, BCrypt.gensalt());
+    }
+
+    public void setPasswordString(String password) {
+        this.password = password;
+    }
+
+    public User(String username, String email, String password, int userGroupId) {
+        this.username = username;
+        this.email = email;
+        setPassword(password);
+        this.userGroupId = userGroupId;
+    }
+
+    public User(int id, String username, String email, String password, int userGroupId) {
         this.id = id;
         this.username = username;
         this.email = email;
@@ -38,6 +53,7 @@ public class User {
                 ", username='" + username + '\'' +
                 ", email='" + email + '\'' +
                 ", password='" + password + '\'' +
+                ", userGroupId=" + userGroupId +
                 '}';
     }
 
@@ -69,15 +85,12 @@ public class User {
         return password;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
-    }
 
-    public String getUserGroupId() {
+    public int getUserGroupId() {
         return userGroupId;
     }
 
-    public void setUserGroupId(String userGroupId) {
+    public void setUserGroupId(int userGroupId) {
         this.userGroupId = userGroupId;
     }
 

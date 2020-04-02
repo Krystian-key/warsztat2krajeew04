@@ -9,9 +9,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class UsersGroupDao {
-    private static final String CREATE_USERS_GROUP_QUERY = "INSERT INTO users_group(id, name) VALUES (?,?);";
+    private static final String CREATE_USERS_GROUP_QUERY = "INSERT INTO users_group(name) VALUE (?);";
     private static final String READ_USERS_GROUP_QUERY = "SELECT * FROM users_group where id = ?;";
-    private static final String UPDATE_USERS_GROUP_QUERY = "UPDATE users_group SET id = ?, name = ?,  where id = ?;";
+    private static final String UPDATE_USERS_GROUP_QUERY = "UPDATE users_group SET name = ?,  where id = ?;";
     private static final String DELETE_USERS_GROUP_QUERY = "DELETE FROM users_group WHERE id = ?;";
     private static final String FIND_ALL_USERS_GROUP_QUERY = "SELECT * FROM users_group;";
 
@@ -19,8 +19,7 @@ public class UsersGroupDao {
         try (Connection connection = DbUtils.getConnection()) {
             PreparedStatement statement =
                     connection.prepareStatement(CREATE_USERS_GROUP_QUERY, Statement.RETURN_GENERATED_KEYS);
-            statement.setInt(1, usersGroup.getId());
-            statement.setString(2, usersGroup.getName());
+            statement.setString(1, usersGroup.getName());
             statement.executeUpdate();
             ResultSet resultSet = statement.getGeneratedKeys();
             if (resultSet.next()) {
@@ -53,8 +52,8 @@ public class UsersGroupDao {
     public void update(UsersGroup users) {
         try (Connection connection = DbUtils.getConnection()) {
             PreparedStatement statement = connection.prepareStatement(UPDATE_USERS_GROUP_QUERY);
-            statement.setString(2, users.getName());
-            statement.setInt(1, users.getId());
+            statement.setInt(2, users.getId());
+            statement.setString(1, users.getName());
             statement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
