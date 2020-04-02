@@ -1,0 +1,1 @@
+UPDATE warsztat2krajeew04.users SET username = 'TEstowy ziomek', email = 'ziomek@gmail.com', password = '1234' WHERE id = 1;

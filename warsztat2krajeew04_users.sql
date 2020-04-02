@@ -1,0 +1,1 @@
+INSERT INTO warsztat2krajeew04.users (id, username, email, password) VALUES (1, 'TEstowy ziomek', 'ziomek@gmail.com', '1234');
