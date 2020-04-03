@@ -10,18 +10,18 @@ CREATE TABLE warsztat2krajeew04.users_group
     PRIMARY KEY (id)
 );
 
-CREATE TABLE user
+CREATE TABLE users
 (
     id            INT(11) AUTO_INCREMENT,
     username      VARCHAR(255),
     email         VARCHAR(255) UNIQUE NOT NULL,
     password      VARCHAR(245)        NOT NULL,
-    user_group_id INT                 NOT NULL,
+    user_group_id INT                 NULL,
     PRIMARY KEY (id),
     FOREIGN KEY (user_group_id) REFERENCES users_group (id)
 );
 
-CREATE TABLE exercise
+CREATE TABLE exercises
 (
     id          INT(11) AUTO_INCREMENT,
     title       VARCHAR(255),
@@ -38,6 +38,6 @@ CREATE TABLE solutions
     exercise_id INT,
     users_id    INT,
     PRIMARY KEY (id),
-        FOREIGN KEY (exercise_id) REFERENCES exercise (id),
-        FOREIGN KEY (users_id) REFERENCES user (id)
+        FOREIGN KEY (exercise_id) REFERENCES exercises (id),
+        FOREIGN KEY (users_id) REFERENCES users (id)
 );

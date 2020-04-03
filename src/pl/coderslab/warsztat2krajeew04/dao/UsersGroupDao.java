@@ -11,7 +11,7 @@ import java.util.List;
 public class UsersGroupDao {
     private static final String CREATE_USERS_GROUP_QUERY = "INSERT INTO users_group(name) VALUE (?);";
     private static final String READ_USERS_GROUP_QUERY = "SELECT * FROM users_group where id = ?;";
-    private static final String UPDATE_USERS_GROUP_QUERY = "UPDATE users_group SET name = ?,  where id = ?;";
+    private static final String UPDATE_USERS_GROUP_QUERY = "UPDATE users_group SET name = ?  where id = ?;";
     private static final String DELETE_USERS_GROUP_QUERY = "DELETE FROM users_group WHERE id = ?;";
     private static final String FIND_ALL_USERS_GROUP_QUERY = "SELECT * FROM users_group;";
 

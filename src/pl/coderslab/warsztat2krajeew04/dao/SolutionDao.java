@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class SolutionDao {
-    private static final String CREATE_SOLUTION_QUERY = "INSERT INTO solutions( created, updated, description, exercise_id, users_id) VALUES (?, ?, ?, ?, ?);";
+    private static final String CREATE_SOLUTION_QUERY = "INSERT INTO solutions(created,exercise_id, users_id) VALUES (?, ?, ?);";
     private static final String READ_SOLUTION_QUERY = "SELECT * FROM solutions where id = ?;";
     private static final String FIND_ALL_SOLUTIONS_BY_USER_ID_QUERY = "SELECT * FROM solutions where user_id = ?;";
     private static final String FIND_ALL_SOLUTIONS_BY_EXERCISE_ID_QUERY = "SELECT * FROM solutions where exercise_id = ? ORDER BY created DESC;";
@@ -22,10 +22,8 @@ public class SolutionDao {
             PreparedStatement statement =
                     connection.prepareStatement(CREATE_SOLUTION_QUERY, Statement.RETURN_GENERATED_KEYS);
             statement.setString(1, solution.getCreated().toString());
-            statement.setString(2, solution.getUpdated().toString());
-            statement.setString(3, solution.getDescription());
-            statement.setInt(4, solution.getExerciseId());
-            statement.setInt(5, solution.getUsersId());
+            statement.setInt(2, solution.getExerciseId());
+            statement.setInt(3, solution.getUsersId());
             statement.executeUpdate();
             ResultSet resultSet = statement.getGeneratedKeys();
             if (resultSet.next()) {

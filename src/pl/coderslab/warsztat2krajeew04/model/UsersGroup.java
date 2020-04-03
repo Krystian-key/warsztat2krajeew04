@@ -16,6 +16,10 @@ public class UsersGroup {
         return id;
     }
 
+    public UsersGroup(String name) {
+        this.name = name;
+    }
+
     public void setId(int id) {
         this.id = id;
     }

@@ -1,17 +1,18 @@
 package pl.coderslab.warsztat2krajeew04.controller;
 
+import pl.coderslab.warsztat2krajeew04.dao.UserDao;
+import pl.coderslab.warsztat2krajeew04.dao.UsersGroupDao;
 import pl.coderslab.warsztat2krajeew04.model.User;
-import pl.coderslab.warsztat2krajeew04.utils.DbUtils;
+import pl.coderslab.warsztat2krajeew04.model.UsersGroup;
 
-import java.sql.Connection;
-import java.sql.SQLException;
+import java.util.List;
 import java.util.Scanner;
 
 public class UserController {
     public static void main(String[] args) {
         System.out.println("Welcome to user administration panel");
         Scanner scanner = new Scanner(System.in);
-        while (true){
+        while (true) {
             System.out.println();
             System.out.println("Select option and hit enter. Options:");
             System.out.println("1 - Add");
@@ -20,11 +21,11 @@ public class UserController {
             System.out.println("0 - Quit");
             String input = scanner.nextLine();
 
-            if(input.equals("0")){
+            if (input.equals("0")) {
                 break;
-            } else if (input.equals("1")){
+            } else if (input.equals("1")) {
                 addUser();
-            } else if(input.equals("2")){
+            } else if (input.equals("2")) {
                 editUser();
             } else if (input.equals("3")) {
                 deleteUser();
@@ -36,52 +37,59 @@ public class UserController {
     }
 
     private static void deleteUser() {
-        //TODO
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Eneter userId to delete");
+        final int userId = scanner.nextInt();
+        try {
+            UserDao userDao = new UserDao();
+            userDao.delete(userId);
+        } catch (Exception e) {
+            System.out.println("Invalid delete from database");
+        }
     }
 
     private static void editUser() {
-        //TODO
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Enter id");
+        final int userId = Integer.parseInt(scanner.nextLine());
+        System.out.println("Enter username");
+        final String userName = scanner.nextLine();
+        System.out.println("Enter email");
+        final String userEmail = scanner.nextLine();
+        System.out.println("Enter password");
+        final String userPassword = scanner.nextLine();
+        System.out.println("Enter userGroupId");
+        final int userGroupId = Integer.parseInt(scanner.nextLine());
+        try{
+            UserDao userDao = new UserDao();
+            User user = new User(userId, userName, userEmail, userPassword, userGroupId);
+            userDao.update(user);
+            System.out.println("user edited!");
+        }catch (Exception e ){
+            System.out.println("Eroor while editing user");
+        }
     }
 
     private static void addUser() {
-        try {
-            Scanner scanner = new Scanner(System.in);
-
-            System.out.println("Enter username");
-            final String username = scanner.nextLine();
-            System.out.println("Enter email");
-            final String email = scanner.nextLine();
-            System.out.println("Enter password");
-            final String password = scanner.nextLine();
-            User u = new User(username, email, password);
-            Connection conn = DbUtils.getConnection();
-//            u.saveToDB(conn);
-            conn.close();
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Enter username");
+        final String username = scanner.nextLine();
+        System.out.println("Enter email");
+        final String email = scanner.nextLine();
+        System.out.println("Enter password");
+        final String password = scanner.nextLine();
+        System.out.println("Enter userGroupId");
+        List<UsersGroup> usersGroups = new UsersGroupDao().findAll();
+        for (UsersGroup group : usersGroups) {
+            System.out.println("id "+group.getId()+" name: "+ group.getName());
+        }
+        final int userGroupId = Integer.parseInt(scanner.nextLine());
+        User user = new User(username, email, password, userGroupId);
+        UserDao userDao = new UserDao();
+        if (userDao.create(user) != null) {
             System.out.println("User saved");
-        } catch (SQLException e){
-            e.printStackTrace();
+        } else {
+            System.out.println("Invalid save to database");
         }
     }
 }
-
-
-/* private static void addUser(){
-        System.out.println("get user data from console into local variables");
-        // set user data from above variables
-        User u = new User("username","username@mail.pl", "password");
-        if(userDao.create(u)!=null) {
-            System.out.println("Dodano użytkownika!");
-        } else {
-            System.out.println("Błąd zapisu do bazy!");
-        }
-    }
-
-    private static void getUser() {
-        Scanner scan = new Scanner(System.in);
-
-        System.out.println("get user id from console");
-        User u = userDao.read(1);
-        System.out.println(u.getEmail());
-    }*/
-
-

@@ -16,7 +16,7 @@ public class Solution {
         this.updated = updated;
         this.description = description;
         this.exerciseId = exerciseId;
-        this.usersId = usersId;
+        this.usersId= usersId;
     }
 
     public Solution() {
