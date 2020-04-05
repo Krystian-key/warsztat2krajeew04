@@ -11,9 +11,9 @@ import java.util.List;
 public class SolutionDao {
     private static final String CREATE_SOLUTION_QUERY = "INSERT INTO solutions(created,exercise_id, users_id) VALUES (?, ?, ?);";
     private static final String READ_SOLUTION_QUERY = "SELECT * FROM solutions where id = ?;";
-    private static final String FIND_ALL_SOLUTIONS_BY_USER_ID_QUERY = "SELECT * FROM solutions where user_id = ?;";
+    private static final String FIND_ALL_SOLUTIONS_BY_USER_ID_QUERY = "SELECT * FROM solutions where users_id = ?;";
     private static final String FIND_ALL_SOLUTIONS_BY_EXERCISE_ID_QUERY = "SELECT * FROM solutions where exercise_id = ? ORDER BY created DESC;";
-    private static final String UPDATE_SOLUTION_QUERY = "UPDATE solutions SET created = ?, updated= ?, description = ?, exercise_id = ?, users_id = ?,  where id = ?;";
+    private static final String UPDATE_SOLUTION_QUERY = "UPDATE solutions SET  updated= ?, description = ? where id = ?;";
     private static final String DELETE_SOLUTION_QUERY = "DELETE FROM solutions WHERE id = ?;";
     private static final String FIND_ALL_SOLUTIONS_QUERY = "SELECT * FROM solutions;";
 
@@ -60,12 +60,9 @@ public class SolutionDao {
     public void update(Solution solution) {
         try (Connection connection = DbUtils.getConnection()) {
             PreparedStatement statement = connection.prepareStatement(UPDATE_SOLUTION_QUERY);
-            statement.setInt(6, solution.getId());
-            statement.setString(1, solution.getCreated().toString());
-            statement.setString(2, solution.getUpdated().toString());
-            statement.setString(3, solution.getDescription());
-            statement.setInt(4, solution.getExerciseId());
-            statement.setInt(5, solution.getUsersId());
+            statement.setInt(3, solution.getId());
+            statement.setString(1, solution.getUpdated().toString());
+            statement.setString(2, solution.getDescription());
             statement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -113,7 +110,9 @@ public class SolutionDao {
                 Solution solution = new Solution();
                 solution.setId(resultSet.getInt("id"));
                 solution.setCreated(resultSet.getTimestamp("created").toLocalDateTime());
-                solution.setUpdated(resultSet.getTimestamp("updated").toLocalDateTime());
+                if(resultSet.getTimestamp("updated")!=null){
+                    solution.setUpdated(resultSet.getTimestamp("updated").toLocalDateTime());
+                }
                 solution.setDescription(resultSet.getString("description"));
                 solution.setExerciseId(resultSet.getInt("exercise_id"));
                 solution.setUsersId(resultSet.getInt("users_id"));

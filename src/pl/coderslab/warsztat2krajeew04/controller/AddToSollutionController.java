@@ -3,16 +3,19 @@ package pl.coderslab.warsztat2krajeew04.controller;
 import pl.coderslab.warsztat2krajeew04.dao.SolutionDao;
 import pl.coderslab.warsztat2krajeew04.model.Solution;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
 public class AddToSollutionController {
     public static void main(String[] args) {
-
+        int userId = 0;
+        for(String str : args){
+            userId=Integer.parseInt(str);
+        }
         System.out.println("Enter User Id");
         Scanner scanner = new Scanner(System.in);
-        int userId = Integer.parseInt(scanner.nextLine());
         while (true){
             System.out.println();
             System.out.println("Select option and hit enter. Options:");
@@ -40,7 +43,7 @@ public class AddToSollutionController {
     public static void add(int userId){
         List<Solution> solutionDaos =  new SolutionDao().findAllByUserId(userId);
         for(Solution solution : solutionDaos){
-            if(solution.getDescription().equals("")){
+            if(solution.getDescription()==null){
                 System.out.println(" id "+ solution.getId() + " solution Exercie Id" + solution.getExerciseId());
             }
         }
@@ -48,8 +51,12 @@ public class AddToSollutionController {
         Scanner scanner = new Scanner(System.in);
         int sollutionId = Integer.parseInt(scanner.nextLine());
         System.out.println("Enter Sollution");
-        String description =(scanner.nextLine());
-        //TO DO zapisać do bazy danych + args tablica
+        String description =scanner.nextLine();
 
+        Solution solution = new Solution();
+        solution.setUpdated(LocalDateTime.now());
+        solution.setId(sollutionId);
+        solution.setDescription(description);
+        new SolutionDao().update(solution);
     }
 }

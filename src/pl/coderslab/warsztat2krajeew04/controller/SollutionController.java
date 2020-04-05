@@ -23,7 +23,6 @@ public class SollutionController {
             System.out.println("Select option and hit enter. Options:");
             System.out.println("1 - Add");
             System.out.println("2 - Edit");
-            System.out.println("3 - Delete");
             System.out.println("0 - Quit");
             String input = scanner.nextLine();
 
