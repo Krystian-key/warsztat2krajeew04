@@ -1,6 +1,5 @@
 package pl.coderslab.warsztat2krajeew04.dao;
 
-import pl.coderslab.warsztat2krajeew04.model.User;
 import pl.coderslab.warsztat2krajeew04.model.UsersGroup;
 import pl.coderslab.warsztat2krajeew04.utils.DbUtils;
 

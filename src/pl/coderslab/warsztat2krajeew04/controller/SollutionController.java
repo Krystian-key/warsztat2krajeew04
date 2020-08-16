@@ -3,14 +3,11 @@ package pl.coderslab.warsztat2krajeew04.controller;
 import pl.coderslab.warsztat2krajeew04.dao.ExerciseDao;
 import pl.coderslab.warsztat2krajeew04.dao.SolutionDao;
 import pl.coderslab.warsztat2krajeew04.dao.UserDao;
-import pl.coderslab.warsztat2krajeew04.dao.UsersGroupDao;
 import pl.coderslab.warsztat2krajeew04.model.Exercise;
 import pl.coderslab.warsztat2krajeew04.model.Solution;
 import pl.coderslab.warsztat2krajeew04.model.User;
-import pl.coderslab.warsztat2krajeew04.model.UsersGroup;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 

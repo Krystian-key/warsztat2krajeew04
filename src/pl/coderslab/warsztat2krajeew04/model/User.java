@@ -2,11 +2,6 @@ package pl.coderslab.warsztat2krajeew04.model;
 
 import org.mindrot.jbcrypt.BCrypt;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-
 public class User {
     private int id;
     private String username;

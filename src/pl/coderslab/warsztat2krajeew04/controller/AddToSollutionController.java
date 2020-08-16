@@ -4,7 +4,6 @@ import pl.coderslab.warsztat2krajeew04.dao.SolutionDao;
 import pl.coderslab.warsztat2krajeew04.model.Solution;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 

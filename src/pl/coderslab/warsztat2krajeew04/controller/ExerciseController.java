@@ -1,9 +1,7 @@
 package pl.coderslab.warsztat2krajeew04.controller;
 
 import pl.coderslab.warsztat2krajeew04.dao.ExerciseDao;
-import pl.coderslab.warsztat2krajeew04.dao.UsersGroupDao;
 import pl.coderslab.warsztat2krajeew04.model.Exercise;
-import pl.coderslab.warsztat2krajeew04.model.UsersGroup;
 
 import java.util.Scanner;
 

@@ -1,7 +1,5 @@
 package pl.coderslab.warsztat2krajeew04.model;
 
-import org.mindrot.jbcrypt.BCrypt;
-
 public class Exercise {
     private int id;
     private String title;

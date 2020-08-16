@@ -1,11 +1,8 @@
 package pl.coderslab.warsztat2krajeew04.controller;
 
-import pl.coderslab.warsztat2krajeew04.dao.UserDao;
 import pl.coderslab.warsztat2krajeew04.dao.UsersGroupDao;
-import pl.coderslab.warsztat2krajeew04.model.User;
 import pl.coderslab.warsztat2krajeew04.model.UsersGroup;
 
-import java.util.List;
 import java.util.Scanner;
 
 public class UserGroupController {
